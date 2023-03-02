@@ -1,16 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>UniReg</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>UniversityRegistration</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
+<body>
+<header class="main">
+  <h1><%= @page_title %></h1>
+</header>
+<section class="content">
+  <nav class="side_nav">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <% if user_signed_in? %>
+        <%# if current_student.student_profile %>
+<!--          <li><%#= link_to "Profile", student_profile_path(current_student.student_profile) %></li>-->
+        <%# else %>
+<!--          <li><%#= link_to "Create Profile", new_student_profile_path %></li>-->
+        <%# end %>
+
+
+         <li><a href="/courses">Course List</a></li>
+      <% end %>
+    </ul>
+  </nav>
+  <main class='<%= controller.controller_name %>'>
     <%= yield %>
-  </body>
+  </main>
+  ➤
+</section>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+</body>
 </html>
+
