@@ -68,4 +68,17 @@ class CoursesController < ApplicationController
     def course_params
       params.require(:course).permit(:title, :course_code, :credit, :semester)
     end
+
+  def enroll
+    course = Course.find(params[:id])
+    user = current_user # or however you get the current user
+    enrollment = Enrollment.create(course: course, user: user)
+    if enrollment.save
+      flash[:success] = "You are now enrolled in #{course.name}!"
+      redirect_to course
+    else
+      flash[:error] = "Failed to enroll in #{course.name}."
+      redirect_to courses_path
+    end
+  end
 end
