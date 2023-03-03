@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :semesters
   resources :profiles ,only: [:new, :create, :edit, :update, :show]
   devise_for :users
   root to: 'home#index'

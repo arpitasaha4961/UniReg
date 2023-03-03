@@ -24,7 +24,9 @@
         <% else %>
           <li><%= link_to "Create Profile", new_profile_path %></li>
         <% end %>
+        <%# if current_user. %>
          <li><a href="/courses">Course List</a></li>
+         <li><a href="/semesters">Semester</a></li>
       <% end %>
     </ul>
   </nav>
