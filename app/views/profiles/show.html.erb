@@ -39,6 +39,10 @@
   <strong>Emergency contact phone:</strong>
   <%= @profile.emergency_contact_phone %>
 </p>
+<p>
+  <strong>Image:</strong><br>
+  <%= image_tag @profile.image.url if @profile.image.present? %>
+</p>
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>
