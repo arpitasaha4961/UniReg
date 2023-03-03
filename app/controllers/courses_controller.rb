@@ -4,11 +4,17 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all
+    if params[:semester].present?
+      @courses = Course.where(semester: params[:semester])
+    else
+      @courses = Course.all
+    end
   end
 
   # GET /courses/1 or /courses/1.json
   def show
+    @course = Course.find(params[:id])
+    authorize! :read, @course
   end
 
   # GET /courses/new
