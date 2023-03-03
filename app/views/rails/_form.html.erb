@@ -1,0 +1,77 @@
+<%= form_with(model: rail) do |form| %>
+  <% if rail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rail.errors.count, "error") %> prohibited this rail from being saved:</h2>
+
+      <ul>
+        <% rail.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :generate %>
+    <%= form.text_field :generate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :scaffold %>
+    <%= form.text_field :scaffold %>
+  </div>
+
+  <div class="field">
+    <%= form.label :StudentProfile %>
+    <%= form.text_field :StudentProfile %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_of_birth %>
+    <%= form.date_select :date_of_birth %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :emergency_contact_name %>
+    <%= form.text_field :emergency_contact_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :emergency_contact_phone %>
+    <%= form.text_field :emergency_contact_phone %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

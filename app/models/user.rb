@@ -6,4 +6,5 @@ class User < ApplicationRecord
   enum role: { student: 0, admin: 1 }
   has_many :enrollments, dependent: :destroy
   has_many :courses, through: :enrollments
+  has_one :profile
 end

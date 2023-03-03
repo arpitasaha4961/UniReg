@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_02_114724) do
+ActiveRecord::Schema.define(version: 2023_03_03_043911) do
 
   create_table "courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
@@ -30,6 +30,21 @@ ActiveRecord::Schema.define(version: 2023_03_02_114724) do
     t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
+  create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.date "date_of_birth"
+    t.string "address"
+    t.string "phone"
+    t.string "email"
+    t.string "emergency_contact_name"
+    t.string "emergency_contact_phone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -45,4 +60,5 @@ ActiveRecord::Schema.define(version: 2023_03_02_114724) do
 
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
+  add_foreign_key "profiles", "users"
 end
