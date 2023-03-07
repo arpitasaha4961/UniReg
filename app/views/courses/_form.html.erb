@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= form.label :credit %>
-    <%= form.text_field :credit %>
+    <%= form.number_field :credit %>
   </div>
 
   <div class="field">
     <%= form.label :semester %>
-    <%= form.text_field :semester %>
+    <%= form.select :semester, options_for_select(['Spring', 'Summer', 'Fall']) %>
   </div>
 
   <div class="actions">
