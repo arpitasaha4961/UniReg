@@ -8,6 +8,7 @@ class Ability
         can :manage, Semester
       else
         can :read, Course
+        can :enroll, Course, user_id: user.id
         can :read, Semester
       end
     end

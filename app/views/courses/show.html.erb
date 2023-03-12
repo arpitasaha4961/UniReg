@@ -20,5 +20,10 @@
   <%= @course.semester %>
 </p>
 
+<%# if current_user.student? && !@course.enrolled?(current_user) %>
+  <%#= link_to 'Enroll in this course', enroll_course_path(@course), method: :post, class: 'btn btn-primary' %>
+<%# end %>
+<%#= button_to "Enroll in Course", enroll_course_path(@course), method: :post %>
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>
+

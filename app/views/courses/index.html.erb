@@ -32,9 +32,13 @@
         <td><%= course.credit %></td>
         <td><%= course.semester %></td>
 
+
         <td><%= link_to 'Show', course %></td>
         <td><%= link_to 'Edit', edit_course_path(course) %></td>
         <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.role == 'student' %>
+         <td><%= button_to "Enroll", enroll_course_path(@course), method: :post %></td>
+        <% end %>
       </tr>
     <% end %>
   <% else %>
@@ -45,3 +49,4 @@
 </table>
 <br>
 <%= link_to 'New Course', new_course_path %>
+<%#= button_to "Enroll", enroll_course_path(@course), method: :post %>

@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy enroll]
 
   # GET /courses or /courses.json
   def index
@@ -64,27 +64,55 @@ class CoursesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def course_params
-      params.require(:course).permit(:title, :course_code, :credit, :semester)
-    end
-
   def enroll
-    course = Course.find(params[:id])
-    user = current_user # or however you get the current user
-    enrollment = Enrollment.create(course: course, user: user)
-    if enrollment.save
-      flash[:success] = "You are now enrolled in #{course.name}!"
-      redirect_to course
+    puts "i am in enroll"
+    @course = Course.find(params[:id])
+    @semester = Semester.find(params[:semester_id])
+    @enrollment = Enrollment.new(user: current_user, course: @course, semester: @semester)
+    puts "DEBUG: @enrollment = #{@enrollment}"
+    if @enrollment.save
+      redirect_to @course, notice: "Enrolled successfully."
     else
-      flash[:error] = "Failed to enroll in #{course.name}."
-      redirect_to courses_path
+      redirect_to @course, alert: "Enrollment failed."
     end
+
+    # @course = Course.find(params[:id])
+    # @semester = Semester.find(params[:semester_id])
+    # @user = current_user
+    #
+    # puts @user
+    # # puts @course
+    # # puts @semester
+    #
+    # if current_user.enrollments.exists?(course: @course, semester: @semester)
+    #   redirect_to @course, alert: 'You have already enrolled in this course for the selected semester'
+    # else
+    #   enrollment = Enrollment.new(course: @course, user: current_user, semester: @semester)
+    #   if enrollment.save
+    #     redirect_to @course, notice: "You have successfully enrolled in this course for the selected semester"
+    #   else
+    #     redirect_to @course, alert: "Failed to enroll in this course for the selected semester"
+    #   end
+    # end
+    # @course = Course.find(params[:id])
+    # current_user.courses << @course
+    # redirect_to root_path
+    # @course.enrollments.create(user_id: current_user.id)
+    # redirect_to @course, notice: 'You have successfully enrolled in this course!'
   end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_course
+    @course = Course.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def course_params
+    # params.require(:course).permit(:title, :course_code, :credit, :semester)
+    params.fetch(:course, {}).permit(:title, :course_code, :credit, :semester)
+  end
+
+
+
 end

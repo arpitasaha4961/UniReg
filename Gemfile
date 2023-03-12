@@ -57,5 +57,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'cancancan'
 gem 'carrierwave'
-gem 'mini_magick','3.8.0'
+gem 'mini_magick'
 gem 'bootstrap', '~> 5.1.0'

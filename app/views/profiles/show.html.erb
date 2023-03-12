@@ -46,3 +46,21 @@
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>
+
+<h1><%= @user.profile.first_name %></h1>
+
+<% if @user.student? %>
+  <% if @user == current_user %>
+    <%#= button_to "Edit Profile", edit_user_path(@user) %>
+  <% end %>
+
+  <h2>Enrolled Courses:</h2>
+
+  <ul>
+    <% @user.courses.each do |course| %>
+      <li><%= link_to course.name, course_path(course) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>This user is not a student.</p>
+<% end %>
