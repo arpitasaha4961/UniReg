@@ -27,6 +27,10 @@
         <%# if current_user. %>
          <li><a href="/courses">Course List</a></li>
          <li><a href="/semesters">Semester</a></li>
+        <%if current_user.student? %>
+          <li><%= link_to "Enrolled Courses", enrolled_courses_user_path(current_user) %></li>
+        <%end %>
+
          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
       <% end %>
     </ul>

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :authorize_admin!, only: [:publish_results]
   def publish_results
     @user = User.find(params[:user_id])
+
     # puts "I am in publish"
     # puts @user
     # Publish the results
@@ -18,7 +19,14 @@ class UsersController < ApplicationController
     end
     redirect_to root_path, notice: "Results published and email sent to students."
   end
-
+  # def show
+  #   @user = User.find(params[:id])
+  #   @courses = @user.courses
+  #   @enrollments = @user.enrollments.includes(:course)
+  # end
+  def enrolled_courses
+    @enrollments = current_user.enrollments.includes(:course)
+  end
   private
   def set_user
     @user = User.find(params[:id])

@@ -1,0 +1,21 @@
+<h1>Enrolled Courses</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Course Title</th>
+    <th>Course Code</th>
+    <th>Credit</th>
+<!--    <th>Semester</th>-->
+  </tr>
+  </thead>
+  <tbody>
+  <% @enrollments.each do |enrollment| %>
+    <tr>
+      <td><%= enrollment.course.title %></td>
+      <td><%= enrollment.course.course_code %></td>
+      <td><%= enrollment.course.credit %></td>
+<!--      <td><%#= enrollment.course.semester %></td>-->
+    </tr>
+  <% end %>
+  </tbody>
+</table>

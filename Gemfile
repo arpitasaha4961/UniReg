@@ -58,4 +58,5 @@ gem 'devise'
 gem 'cancancan'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'bootstrap', '~> 5.1.0'
+gem 'bootstrap', '~> 5.0'
+

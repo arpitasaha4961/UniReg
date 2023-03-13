@@ -1,0 +1,7 @@
+<h1>My Enrolled Courses</h1>
+
+<ul>
+  <% @enrollments.each do |enrollment| %>
+    <li><%= enrollment.course.title %></li>
+  <% end %>
+</ul>

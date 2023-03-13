@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_course, only: %i[ show edit update destroy enroll]
+  before_action :set_course, only: %i[ show edit update destroy]
 
   # GET /courses or /courses.json
   def index
@@ -14,6 +14,7 @@ class CoursesController < ApplicationController
   # GET /courses/1 or /courses/1.json
   def show
     @course = Course.find(params[:id])
+    @enrollments = Enrollment.find(params[:id])
     authorize! :read, @course
   end
 
@@ -65,11 +66,15 @@ class CoursesController < ApplicationController
   end
 
   def enroll
-    puts "i am in enroll"
-    @course = Course.find(params[:id])
-    @semester = Semester.find(params[:semester_id])
-    @enrollment = Enrollment.new(user: current_user, course: @course, semester: @semester)
-    puts "DEBUG: @enrollment = #{@enrollment}"
+    # puts "i am in enroll"
+    @user=current_user
+    # puts @user.id
+    @course = Course.find(params[:c_id])
+    @semester = Semester.find_by(current: 1)
+    # puts @semester
+    @enrollment = Enrollment.new(course: @course,user: current_user,  semester: @semester)
+
+    # puts "DEBUG: @enrollment = #{@enrollment}"
     if @enrollment.save
       redirect_to @course, notice: "Enrolled successfully."
     else
@@ -100,6 +105,16 @@ class CoursesController < ApplicationController
     # @course.enrollments.create(user_id: current_user.id)
     # redirect_to @course, notice: 'You have successfully enrolled in this course!'
   end
+
+  # def enrolled_courses
+  #   puts "i am is this enrollment courses"
+  #
+  #   puts @enrollments
+  #   # @enrollments = current_user.enrollments
+  #   # enrolled_course_ids = @enrollments.pluck(:course_id)
+  #   # @enrolled_courses = Course.where(id: enrolled_course_ids)
+  # end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.
